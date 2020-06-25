@@ -19,7 +19,7 @@ class Customer extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'phone', 'image', 'image_file', 'password', 'status', 'social_id', 'provider', 'company_id',
+        'name', 'email', 'phone', 'image', 'password', 'status', 'social_id', 'provider', 'company_id',
     ];
 
     /**
@@ -27,15 +27,8 @@ class Customer extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token', 'social_id', 'provider', 'company_id', 'image_file', 'updated_at'
+        'password', 'remember_token', 'social_id', 'provider', 'company_id', 'updated_at'
     ];
-
-    public function setImageFileAttribute($image) {
-        if($image) {
-            $this->attributes['image_file'] = $image;
-            $this->attributes['image'] = env('APP_URL') .'/storage/customer/' .$image;
-        }
-    }
 
     public function setEmailAttribute($value) {
         if ( empty($value) ) { // will check for empty string
