@@ -17,7 +17,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'phone', 'image', 'password', 'ducument_number', 'type', 'status', 'social_id', 'provider',
+        'name', 'email', 'phone', 'image', 'password', 'ducument_number', 'type', 'status',
     ];
 
     /**
@@ -26,16 +26,8 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token', 'social_id', 'provider', 'updated_at'
+        'password', 'remember_token', 'updated_at'
     ];
-
-    public function setEmailAttribute($value) {
-        if ( empty($value) ) { // will check for empty string
-            $this->attributes['email'] = NULL;
-        } else {
-            $this->attributes['email'] = $value;
-        }
-    }
 
     /**
      * jwt implemented methods

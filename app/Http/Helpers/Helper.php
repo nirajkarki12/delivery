@@ -22,9 +22,9 @@ class Helper
         $imagePath = "/$folder/$image";
 
         if(Storage::disk('uploads')->exists($imagePath)) {
-             Storage::disk('uploads')->delete($imagePath);
+            return Storage::disk('uploads')->delete($imagePath);
         }
-        return $imagePath;
+        return false;
     }
 
     public static function fileName() {

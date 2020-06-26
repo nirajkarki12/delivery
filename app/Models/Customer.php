@@ -19,7 +19,7 @@ class Customer extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'phone', 'image', 'password', 'status', 'social_id', 'provider', 'company_id',
+        'name', 'email', 'phone', 'image', 'password', 'status', 'company_id',
     ];
 
     /**
@@ -27,16 +27,8 @@ class Customer extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token', 'social_id', 'provider', 'company_id', 'updated_at'
+        'password', 'remember_token', 'company_id', 'updated_at'
     ];
-
-    public function setEmailAttribute($value) {
-        if ( empty($value) ) { // will check for empty string
-            $this->attributes['email'] = NULL;
-        } else {
-            $this->attributes['email'] = $value;
-        }
-    }
 
     public function company() {
         return $this->belongsTo(Company::class);

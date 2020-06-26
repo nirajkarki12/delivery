@@ -76,80 +76,6 @@ class AuthController extends UserApiController
    }
 
     /**
-    * Social Login APIs
-    * Social Login eg. facebook, google
-    * @bodyParam name string full name max 100 in length.
-    * @bodyParam phone integer unique & min 10-15 in length.
-    * @bodyParam email string unique & valid email address.
-    * @bodyParam image string image link of user.
-    * @bodyParam social_id string required social id of user.
-    * @bodyParam provider string required social provider eg.facebook.
-    *
-    * @response 200 {
-    *  "status": true,
-    *  "data": {
-    *   "name": "Name Example",
-    *   "email": "example@gmail.com",
-    *   "phone": null,
-    *   "image": null,
-    *   "created_at": "2020-04-14 15:00",
-    *   "token": "JWT Token"
-    *  },
-    * "message": "Logged in successfully",
-    * "code": 200
-    * }
-    * @response 200 {
-    *  "status": false,
-    *  "message": "The social id field is required.",
-    *  "code": 200
-    * }
-    */
-   public function socialLogin(Request $request)
-   {
-      try {
-         $validator = Validator::make($request->all(), [
-            'name' => 'max:100',
-            'social_id' => 'required',
-            'provider' => 'required',
-            'email' => 'email|unique:users',
-            'phone' => 'digits_between:10,15|unique:users',
-         ]);
-
-         if($validator->fails()) throw new \Exception($validator->errors()->first());
-
-         $user = User::where('social_id', $request->social_id)->where('provider', $request->provider)->first();
-
-         if(!$user) {
-            $user = new User();
-            $user->name = $request->name;
-            $user->email = $request->email;
-            $user->social_id = $request->social_id;
-            $user->provider = $request->provider;
-            $user->image = $request->image;
-            $user->phone = $request->phone;
-            $user->save();
-         }
-
-         $user->updated_at = new \DateTime();
-         $user->save();
-
-         $response = [
-            'name' => $user->name,
-            'email' => $user->email,
-            'image' => $user->image,
-            'phone' => $user->phone,
-            'created_at' => $user->created_at,
-            'token' => $this->authGuard()->login($user)
-         ];
-
-         return $this->successResponse($response, 'Logged in successfully');
-
-     } catch (\Exception $e) {
-         return $this->errorResponse($e->getMessage());
-     }
-   }
-
-    /**
      * Register APIs
      * User Registration
      * @bodyParam name string required full name max 100 in length.
@@ -258,7 +184,6 @@ class AuthController extends UserApiController
      *   "email": "example@gmail.com",
      *   "phone": null,
      *   "image": null,
-     *   "socialLogin": false,
      *   "created_at": "2020-04-14 15:00"
      *  },
      * "message": "User info fetched successfully",
@@ -285,7 +210,6 @@ class AuthController extends UserApiController
                 'email' => $user->email,
                 'phone' => $user->phone,
                 'image' => $user->image,
-                'socialLogin' => $user->social_id ? true : false,
                 'created_at' => $user->created_at,
             ];
 

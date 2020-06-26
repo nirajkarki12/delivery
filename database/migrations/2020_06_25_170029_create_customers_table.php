@@ -21,8 +21,6 @@ class CreateCustomersTable extends Migration
             $table->string('image')->nullable();
             $table->string('password');
             $table->boolean('status')->default(1);
-            $table->string('social_id')->nullable();
-            $table->string('provider')->nullable();
             $table->unsignedBigInteger('company_id')->nullable();
             $table->foreign('company_id')->references('id')->on('company')->onDelete('set null');
             $table->rememberToken();
