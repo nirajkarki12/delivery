@@ -9,54 +9,73 @@ use App\Notifications\Auth\ResetPasswordQueued;
 
 class User extends Authenticatable implements JWTSubject
 {
-    use Notifiable;
+	use Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'name', 'email', 'phone', 'image', 'password', 'ducument_number', 'type', 'status',
-    ];
+	const CITIZENSHIP = 'citizenship';
+	const LICENSE = 'license';
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password', 'remember_token', 'updated_at'
-    ];
+	public static $documentTypes = [
+		self::CITIZENSHIP,
+		self::LICENSE,
+	];
 
-    /**
-     * jwt implemented methods
-     */
-    public function getJWTIdentifier()
-    {
-        return $this->getKey();
-    }
+	/**
+	* The attributes that are mass assignable.
+	*
+	* @var array
+	*/
+	protected $fillable = [
+		'name', 'email', 'phone', 'image', 'password', 'district_id', 'document_type', 'ducument_front', 'ducument_back', 'phone2', 'phone3', 'status',
+	];
 
-    public function getJWTCustomClaims()
-    {
-        return [
-            'id' => $this->id,
-            'email' => $this->email,
-            'image' => $this->image,
-            'phone' => $this->phone,
-            'socialLogin' => $this->social_id ? true : false
-        ];
-    }
+	/**
+	* The attributes that should be hidden for arrays.
+	*
+	* @var array
+	*/
+	protected $hidden = [
+		'password', 'remember_token', 'updated_at'
+	];
 
-    /**
-     * Send the password reset notification.
-     *
-     * @param  string  $token
-     * @return void
-     */
-    public function sendPasswordResetNotification($token)
-    {
-        $this->notify(new ResetPasswordQueued($token));
-    }
+	/**
+	* The vechiles that belong to the user.
+	*/
+	public function vechiles()
+	{
+		return $this->hasMany(Vechile::class);
+	}
+
+	public function district() {
+		return $this->belongsTo(District::class);
+	}
+
+	/**
+	* jwt implemented methods
+	*/
+	public function getJWTIdentifier()
+	{
+		return $this->getKey();
+	}
+
+	public function getJWTCustomClaims()
+	{
+		return [
+			'id' => $this->id,
+			'email' => $this->email,
+			'image' => $this->image,
+			'phone' => $this->phone,
+		];
+	}
+
+	/**
+	* Send the password reset notification.
+	*
+	* @param  string  $token
+	* @return void
+	*/
+	public function sendPasswordResetNotification($token)
+	{
+		$this->notify(new ResetPasswordQueued($token));
+	}
 
 }

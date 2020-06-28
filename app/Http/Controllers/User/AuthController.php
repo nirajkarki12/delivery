@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Models\Vechile;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Common\UserApiController;
 use Hash;
@@ -74,21 +75,28 @@ class AuthController extends UserApiController
          return $this->errorResponse($e->getMessage());
      }
    }
-
     /**
      * Register APIs
      * User Registration
-     * @bodyParam name string required full name max 100 in length.
-     * @bodyParam phone integer required unique & min 10-15 in length.
-     * @bodyParam password string required min 6 in length.
-     * @bodyParam email string unique & valid email address.
-     * @bodyParam image file accepts: jpeg,png,gif, filesize upto 2MB.
-     * @response 200 {
+	  * @bodyParam name string required full name 4-100 in length.
+	  * @bodyParam phone integer required 10 digit & unique.
+	  * @bodyParam password string required 6-100 in length.
+	  * @bodyParam email string unique & valid email address.
+	  * @bodyParam image file accepts: jpeg,png,gif, filesize upto 2MB.
+	  * @bodyParam vechileType string required walker/bike/van/mini truck.
+	  * @bodyParam vechileNumber string required full vechile number.
+	  * @bodyParam documentType string required citizenship/license.
+	  * @bodyParam documentFront file required accepts: jpeg,png,gif, filesize upto 2MB.
+	  * @bodyParam documentBack file required accepts: jpeg,png,gif, filesize upto 2MB.
+	  * @bodyParam districtId integer required district ID.
+	  * @bodyParam phone2 string required Emergency Contact Number 1 7-10 in length.
+	  * @bodyParam phone3 string Emergency Contact Number 2 7-10 in length.
+	  * @response 200 {
      *  "status": true,
      *  "data": {
      *   "name": "Name Example",
-     *   "email": "example@gmail.com",
-     *   "phone": null,
+     *   "email": null,
+     *   "phone": "98xxxxxxxx",
      *   "image": null,
      *   "created_at": "2020-04-14 15:00",
      *   "token": "JWT Token"
@@ -125,36 +133,74 @@ class AuthController extends UserApiController
     public function register(Request $request)
     {
         try {
+				$data = $request->except('_token');
 
-            $data = $request->except('_token');
+				$vechileType = implode(',', Vechile::$vechileTypes);
+				$documentType = implode(',', User::$documentTypes);
 
-            $validator = Validator::make( $data, [
-                'name' => 'required|max:100',
-                'phone' => 'required|digits_between:10,15|unique:users',
-                'email' => 'email|unique:users',
-                'image' => 'nullable|mimes:jpeg,png,jpg,gif|max:2058',
-                'password' => 'required|min:6',
-            ],
+				$validator = Validator::make( $data, [
+					'name' => 'required|min:4|max:100',
+					'phone' => 'required|digits:10|unique:users',
+					'email' => 'email|unique:users',
+					'image' => 'nullable|mimes:jpeg,png,jpg,gif|max:2058',
+					'password' => 'required|min:6|max:100',
+					'vechileType' => "required|in:$vechileType",
+					'vechileNumber' => "required",
+					'documentType' => "required|in:$documentType",
+					'documentFront' => 'required|mimes:jpeg,png,jpg,gif|max:2058',
+					'documentBack' => 'required|mimes:jpeg,png,jpg,gif|max:2058',
+					'districtId' => 'required|exists:districts,id',
+					'phone2' => 'required|digits_between:7,10',
+					'phone3' => 'nullable|digits_between:7,10',
+				],
                 [],
                 [
-                    'name' => 'Full Name',
-                    'image' => 'Image',
+						'name' => 'Full Name',
+						'image' => 'Image',
+						'phone2' => 'Emergency Contact Number 1',
+						'phone3' => 'Emergency Contact Number 2',
                 ]
             );
             if($validator->fails()) throw new \Exception($validator->messages()->first());
 
-            $user = new User;
-            $user->name = $request->name;
-            $user->email = $request->email;
-            $user->phone = $request->phone;
-            $user->password = Hash::make($request->password);
+			  // Database transaction start
+			  \DB::beginTransaction();
 
-            if($request->file('image')) {
-                if(!$file = Helper::uploadImage($request->file('image'), 'user')) throw new \Exception("Cannot Save Image");
-                $user->image = $file;
-            }
+				$user = new User;
+				$user->name = $request->name;
+				$user->email = $request->email;
+				$user->phone = $request->phone;
+				$user->password = Hash::make($request->password);
+				$user->document_type = $request->documentType;
+				$user->district_id = $request->districtId;
+				$user->phone2 = $request->phone2;
+				$user->phone3 = $request->phone3;
 
-            $user->save();
+				if($request->file('image')) {
+					if(!$file = Helper::uploadImage($request->file('image'), 'user')) throw new \Exception("Cannot Save Image");
+					$user->image = $file;
+				}
+
+				if($request->file('documentFront')) {
+					if(!$file = Helper::uploadImage($request->file('image'), 'user')) throw new \Exception("Cannot Save Document Front");
+					$user->ducument_front = $file;
+				}
+
+				if($request->file('documentBack')) {
+					if(!$file = Helper::uploadImage($request->file('image'), 'user')) throw new \Exception("Cannot Save Document Back");
+					$user->ducument_back = $file;
+				}
+
+				$user->save();
+
+				$vechile = new Vechile;
+				$vechile->type = $request->vechileType;
+				$vechile->vechile_number = $request->vechileNumber;
+				$vechile->user()->associate($user);
+				$vechile->save();
+
+			  // Database commit
+			  \DB::commit();
 
             if (!$token = $this->authGuard()->attempt(['phone' => $user->phone, 'password' => $request->password])) throw new \Exception('Login error');
 
@@ -181,8 +227,8 @@ class AuthController extends UserApiController
      *  "status": true,
      *  "data": {
      *   "name": "Name Example",
-     *   "email": "example@gmail.com",
-     *   "phone": null,
+     *   "email": null,
+     *   "phone": "98xxxxxxxx",
      *   "image": null,
      *   "created_at": "2020-04-14 15:00"
      *  },
@@ -227,8 +273,8 @@ class AuthController extends UserApiController
      *  "status": true,
      *  "data": {
      *   "name": "Name Example",
-     *   "email": "example@gmail.com",
-     *   "phone": null,
+     *   "email": null,
+     *   "phone": "98xxxxxxxx",
      *   "image": null,
      *   "created_at": "2020-04-14 15:00"
      *  },
@@ -282,15 +328,15 @@ class AuthController extends UserApiController
     /**
      * Update Profile APIs
      * Update Profile
-     * @bodyParam name string required max 100 in length.
-     * @bodyParam phone integer required unique & min 10-15 in length.
-     * @bodyParam email string optional unique & valid email address.
+	  * @bodyParam name string required full name 4-100 in length.
+	  * @bodyParam phone integer required 10 digit & unique.
+	  * @bodyParam email string unique & valid email address.
      * @response 200 {
      *  "status": true,
      *  "data": {
      *   "name": "Name Example",
-     *   "email": "example@gmail.com",
-     *   "phone": null,
+     *   "email": null,
+     *   "phone": "98xxxxxxxx",
      *   "image": null,
      *   "created_at": "2020-04-14 15:00"
      *  },
@@ -319,9 +365,11 @@ class AuthController extends UserApiController
             if(!$user = $this->user()) throw new \Exception("User not found");
 
             $validator = Validator::make( $request->all(), [
-                    'name' => 'required|max:100',
+						'name' => 'required|min:4|max:100',
+
+						'name' => 'required|max:100',
                     'email' => "email|unique:users,$user->id",
-                    'phone' => "required|digits_between:10,15|unique:users,$user->id",
+                    'phone' => "required|digits:10|unique:users,$user->id",
                 ]
             );
 

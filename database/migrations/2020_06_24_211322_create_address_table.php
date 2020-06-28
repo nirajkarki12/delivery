@@ -16,9 +16,9 @@ class CreateAddressTable extends Migration
         Schema::create('address', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('district_id')->nullable();
-            $table->string('street_name');
-            $table->string('lat');
-            $table->string('lon');
+            $table->string('street_name')->nullable();
+            $table->string('lat')->nullable();
+            $table->string('lon')->nullable();
             $table->string('addressable_type');
             $table->unsignedBigInteger('addressable_id');
             $table->foreign('district_id')->references('id')->on('districts')->onDelete('set null');

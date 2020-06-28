@@ -70,13 +70,13 @@ class BaseApiController extends Controller
    }
 
    public function errorResponse(string $message = 'error', int $code = Response::HTTP_OK) {
-        $this->rollBack();
+		\DB::rollBack();
 
-        return response()->json([
-         'status' => false,
-         'message' => $message,
-         'code' => $code,
-        ], $code);
+		return response()->json([
+			'status' => false,
+			'message' => $message,
+			'code' => $code,
+		], $code);
    }
 
 

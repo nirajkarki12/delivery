@@ -24,7 +24,7 @@ class Address extends Model
      * @var array
      */
     protected $hidden = [
-        'addressable_type', 'addressable_id', 'district_id', 'updated_at',
+        'addressable_type', 'addressable_id', 'updated_at',
     ];
 
     public function addressable() {

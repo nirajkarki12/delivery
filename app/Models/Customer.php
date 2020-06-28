@@ -27,7 +27,7 @@ class Customer extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token', 'company_id', 'updated_at'
+        'password', 'remember_token', 'updated_at'
     ];
 
     public function company() {
@@ -49,7 +49,6 @@ class Customer extends Authenticatable implements JWTSubject
             'email' => $this->email,
             'image' => $this->image,
             'phone' => $this->phone,
-            'socialLogin' => $this->social_id ? true : false
         ];
     }
 

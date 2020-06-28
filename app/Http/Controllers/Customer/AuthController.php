@@ -24,8 +24,8 @@ class AuthController extends CustomerApiController
     *  "status": true,
     *  "data": {
     *   "name": "Name Example",
-    *   "email": "example@gmail.com",
-    *   "phone": null,
+    *   "email": null,
+    *   "phone": "98xxxxxxxx',
     *   "image": null,
     *   "created_at": "2020-04-14 15:00",
     *   "token": "JWT Token"
@@ -75,21 +75,27 @@ class AuthController extends CustomerApiController
          return $this->errorResponse($e->getMessage());
      }
    }
-
     /**
      * Register APIs
      * User Registration
-     * @bodyParam name string required full name max 100 in length.
-     * @bodyParam phone integer required unique & min 10-15 in length.
-     * @bodyParam password string required min 6 in length.
+     * @bodyParam name string required full name 4-100 in length.
+     * @bodyParam phone integer required 10 digit & unique.
+     * @bodyParam password string required 6-100 in length.
      * @bodyParam email string unique & valid email address.
      * @bodyParam image file accepts: jpeg,png,gif, filesize upto 2MB.
+	  * @bodyParam companyName string company name.
+	  * @bodyParam companyDistrict integer district ID required if companyName is given.
+	  * @bodyParam companyStreetName string street name required if companyName is given.
+	  * @bodyParam companyPhone string company phone 7-10 in length.
+	  * @bodyParam companyOwnerName string owner name.
+	  * @bodyParam companyLat string latitude.
+	  * @bodyParam companyLon string longitude.
      * @response 200 {
      *  "status": true,
      *  "data": {
      *   "name": "Name Example",
-     *   "email": "example@gmail.com",
-     *   "phone": null,
+     *   "email": null,
+     *   "phone": '98xxxxxxxx',
      *   "image": null,
      *   "created_at": "2020-04-14 15:00",
      *   "token": "JWT Token"
@@ -114,11 +120,6 @@ class AuthController extends CustomerApiController
      * }
      * @response 200 {
      *  "status": false,
-     *  "message": "The Image failed to upload.",
-     *  "code": 200
-     * }
-     * @response 200 {
-     *  "status": false,
      *  "message": "Login error",
      *  "code": 200
      * }
@@ -130,68 +131,72 @@ class AuthController extends CustomerApiController
             $data = $request->except('_token');
 
             $validator = Validator::make( $data, [
-                'name' => 'required|max:100',
-                'phone' => 'required|digits_between:10,15|unique:customers',
-                'email' => 'email|unique:customers',
-                'image' => 'nullable|mimes:jpeg,png,jpg,gif|max:2058',
-                'password' => 'required|min:6',
-                'companyName' => 'required',
-                'companyPhone' => 'required',
-                'companyOwnerName' => 'required',
-                'companyDistrict' => 'required',
-                'companyStreetName' => 'required',
-                'companyLat' => 'required',
-                'companyLon' => 'required',
+					'name' => 'required|min:4|max:100',
+					'phone' => 'required|digits:10|unique:customers',
+					'email' => 'email|unique:customers',
+					'image' => 'nullable|mimes:jpeg,png,jpg,gif|max:2058',
+					'password' => 'required|min:6|max:100',
+					'companyName' => 'nullable',
+					'companyDistrict' => 'required_if:companyName|exists:districts,id',
+					'companyStreetName' => 'required_if:companyName',
+					'companyPhone' => 'nullable|digits_between:7,10',
+					'companyOwnerName' => 'nullable',
+					'companyLat' => 'nullable',
+					'companyLon' => 'nullable',
             ],
                 [],
                 [
-                    'name' => 'Full Name',
-                    'image' => 'Image',
+						'name' => 'Full Name',
+						'image' => 'Image',
+						'phone' => 'Mobile',
                 ]
             );
             if($validator->fails()) throw new \Exception($validator->messages()->first());
 
             // Database transaction start
-            $this->beginTransaction();
-                $user = new Customer;
-                $user->name = $request->name;
-                $user->email = $request->email;
-                $user->phone = $request->phone;
-                $user->password = Hash::make($request->password);
+				\DB::beginTransaction();
 
-                if($request->file('image')) {
-                    if(!$file = Helper::uploadImage($request->file('image'), 'user')) throw new \Exception("Cannot Save Image");
-                    $user->image = $file;
-                }
+				$customer = new Customer;
+				$customer->name = $request->name;
+				$customer->email = $request->email;
+				$customer->phone = $request->phone;
+				$customer->password = Hash::make($request->password);
 
-                $company = Company::where('phone', $request->companyPhone)->first();
-                if(!$company) {
-                    $company = new Company;
-                    $company->name = $request->companyName;
-                    $company->phone = $request->companyPhone;
-                    $company->owner_name = $request->companyOwnerName;
-                    $company->save();
+				if($request->file('image')) {
+					if(!$file = Helper::uploadImage($request->file('image'), 'user')) throw new \Exception("Cannot Save Image");
+					$customer->image = $file;
+				}
 
-                    $company->location()->create([
-                        'district_id' => $request->companyDistrict,
-                        'street_name' => $request->companyStreetName,
-                        'lat' => $request->companyLat,
-                        'lon' => $request->companyLon,
-                    ]);
-                }
-                $user->company()->associate($company);
-                $user->save();
+				if($request->companyName) {
+					$company = Company::where('phone', $request->companyPhone)->first();
+					if (!$company) {
+						$company = new Company;
+						$company->name = $request->companyName;
+						$company->phone = $request->companyPhone;
+						$company->owner_name = $request->companyOwnerName;
+						$company->save();
+
+						$company->location()->create([
+							'district_id' => $request->companyDistrict,
+							'street_name' => $request->companyStreetName,
+							'lat' => $request->companyLat,
+							'lon' => $request->companyLon,
+						]);
+					}
+					$customer->company()->associate($company);
+				}
+				$customer->save();
             // Database commit
-            $this->commit();
+				\DB::commit();
 
-            if (!$token = $this->authGuard()->attempt(['phone' => $user->phone, 'password' => $request->password])) throw new \Exception('Login error');
+				if (!$token = $this->authGuard()->attempt(['phone' => $customer->phone, 'password' => $request->password])) throw new \Exception('Login error');
 
             $response = [
-                'name' => $user->name,
-                'email' => $user->email,
-                'phone' => $user->phone,
-                'image' => $user->image,
-                'created_at' => $user->created_at,
+                'name' => $customer->name,
+                'email' => $customer->email,
+                'phone' => $customer->phone,
+                'image' => $customer->image,
+                'created_at' => $customer->created_at,
                 'token' => $token
             ];
             return $this->successResponse($response, 'Registered successfully');
@@ -209,8 +214,8 @@ class AuthController extends CustomerApiController
      *  "status": true,
      *  "data": {
      *   "name": "Name Example",
-     *   "email": "example@gmail.com",
-     *   "phone": null,
+     *   "email": null,
+     *   "phone": "98xxxxxxxx",
      *   "image": null,
      *   "created_at": "2020-04-14 15:00"
      *  },
@@ -255,8 +260,8 @@ class AuthController extends CustomerApiController
      *  "status": true,
      *  "data": {
      *   "name": "Name Example",
-     *   "email": "example@gmail.com",
-     *   "phone": null,
+     *   "email": null,
+     *   "phone": "98xxxxxxxx",
      *   "image": null,
      *   "created_at": "2020-04-14 15:00"
      *  },
@@ -311,15 +316,15 @@ class AuthController extends CustomerApiController
     /**
      * Update Profile APIs
      * Update Profile
-     * @bodyParam name string required max 100 in length.
-     * @bodyParam phone integer required unique & min 10-15 in length.
-     * @bodyParam email string optional unique & valid email address.
+	  * @bodyParam name string required full name 4-100 in length.
+	  * @bodyParam phone integer required 10 digit & unique.
+	  * @bodyParam email string unique & valid email address.
      * @response 200 {
      *  "status": true,
      *  "data": {
      *   "name": "Name Example",
-     *   "email": "example@gmail.com",
-     *   "phone": null,
+     *   "email": null,
+     *   "phone": "98xxxxxxxx",
      *   "image": null,
      *   "created_at": "2020-04-14 15:00"
      *  },
@@ -348,9 +353,9 @@ class AuthController extends CustomerApiController
             if(!$user = $this->user()) throw new \Exception("User not found");
 
             $validator = Validator::make( $request->all(), [
-                    'name' => 'required|max:100',
+                    'name' => 'required|min:4|max:100',
                     'email' => "email|unique:customers,$user->id",
-                    'phone' => "required|digits_between:10,15|unique:customers,$user->id",
+                    'phone' => "required|digits:10|unique:customers,$user->id",
                 ]
             );
 
