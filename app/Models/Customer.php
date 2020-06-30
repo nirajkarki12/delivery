@@ -11,8 +11,6 @@ class Customer extends Authenticatable implements JWTSubject
 {
     use Notifiable;
 
-    protected $with = ['company'];
-
     /**
      * The attributes that are mass assignable.
      *

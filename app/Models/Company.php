@@ -9,7 +9,6 @@ class Company extends Model
 {
     use Notifiable;
     protected $table = 'company';
-    protected $with = ['location'];
 
     /**
      * The attributes that are mass assignable.

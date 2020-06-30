@@ -18,7 +18,7 @@ class AuthController extends CustomerApiController
     /**
     * Login APIs
     * User Login
-    * @bodyParam phone string required valid phone number & min 10-15 in length.
+    * @bodyParam phone string required valid phone number & 10 digit in length.
     * @bodyParam password string required min 6 in length.
     * @response {
     *  "status": true,
@@ -48,8 +48,8 @@ class AuthController extends CustomerApiController
    {
       try {
           $validator = Validator::make($request->all(), [
-              'phone' => 'required|digits_between:10,15',
-              'password' => 'required'
+				'phone' => 'required|digits:10',
+				'password' => 'required'
           ]);
           if($validator->fails()) throw new \Exception($validator->errors()->first());
 
