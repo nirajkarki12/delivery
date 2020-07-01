@@ -8,7 +8,6 @@ use Illuminate\Notifications\Notifiable;
 class District extends Model
 {
     public $timestamps = false;
-    protected $with = ['province'];
 
     use Notifiable;
 

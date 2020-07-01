@@ -13,7 +13,7 @@ class Handler extends ExceptionHandler
      * @var array
      */
     protected $dontReport = [
-        //
+		 //
     ];
 
     /**
@@ -50,7 +50,7 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
-      if ($request->ajax() || $request->wantsJson()) 
+      if ($request->ajax() || $request->wantsJson())
       {
          $exception = $this->prepareException($exception);
 
@@ -63,6 +63,12 @@ class Handler extends ExceptionHandler
          if ($exception instanceof \Illuminate\Validation\ValidationException) {
             return $this->convertValidationExceptionToResponse($exception, $request);
          }
+			if ($exception instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException) {
+				$response['status'] = false;
+				$response['message'] = 'No records found';
+				$response['code'] = 200;
+				return response()->json($response, 200);
+			}
 
          // Default response of 400
          $status = 400;

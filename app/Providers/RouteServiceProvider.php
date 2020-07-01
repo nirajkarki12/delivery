@@ -44,6 +44,7 @@ class RouteServiceProvider extends ServiceProvider
     public function map()
     {
         $this->mapCustomerApiRoutes();
+        $this->mapCommonApiRoutes();
         $this->mapUserApiRoutes();
         $this->mapAdminRoutes();
         $this->mapWebRoutes();
@@ -70,13 +71,28 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function mapCustomerApiRoutes()
+    protected function mapCommonApiRoutes()
     {
-        Route::prefix('api/customer')
+        Route::prefix('api')
             ->middleware('api')
-            ->namespace($this->customerApiNamespace)
-            ->group(base_path('routes/customer.php'));
+            ->namespace($this->namespace)
+            ->group(base_path('routes/common.php'));
     }
+
+	/**
+	 * Define the "api" routes for the application.
+	 *
+	 * These routes are typically stateless.
+	 *
+	 * @return void
+	 */
+	protected function mapCustomerApiRoutes()
+	{
+		Route::prefix('api/customer')
+			->middleware('api')
+			->namespace($this->customerApiNamespace)
+			->group(base_path('routes/customer.php'));
+	}
 
     /**
      * Define the "api" routes for the application.

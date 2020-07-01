@@ -36,16 +36,4 @@ class BaseController extends Controller
         return $this->authGuard()->user();
     }
 
-    public function beginTransaction() {
-        return \DB::beginTransaction();
-    }
-
-    public function commit() {
-        return \DB::commit();
-    }
-
-    public function rollBack() {
-        return \DB::rollBack();
-    }
-
 }

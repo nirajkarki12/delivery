@@ -35,18 +35,6 @@ class BaseApiController extends Controller
         return $this->authGuard($this->guardName)->user();
     }
 
-    public function beginTransaction() {
-        return \DB::beginTransaction();
-    }
-
-    public function commit() {
-        return \DB::commit();
-    }
-
-    public function rollBack() {
-        return \DB::rollBack();
-    }
-
    public function successResponse($data = array(), string $message = 'Successful', int $code = Response::HTTP_OK) {
         $res = [
             'status' => true,
