@@ -44,7 +44,7 @@ class SettingController extends BaseController
             $data = $request->except('_token');
 
             if($request->file('site_logo')) {
-                if(!Helper::deleteImage(Setting::get('site_logo'), 'uploads')) throw new Exception("Error Processing Request", 1);
+                if(!Helper::deleteImage(Setting::get('site_logo'), 'uploads')) throw new \Exception("Error Processing Request", 1);
 
                 if(!$file = Helper::uploadImage($request->file('site_logo'), 'uploads')) throw new \Exception("Cannot Save Logo", 1);
                 $data['site_logo'] = $file;
