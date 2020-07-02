@@ -22,7 +22,7 @@
 
                 <div class="box-body box-profile">
 
-                    <img class="profile-user-img img-responsive img-circle" src="@if( Setting::get('site_logo_path')) {{ Setting::get('site_logo_path') }} @else {{asset('images/logo.png')}} @endif">
+                    <img class="profile-user-img img-responsive img-circle" src="@if( Setting::get('site_logo')) {{ Setting::get('site_logo') }} @else {{asset('images/logo.png')}} @endif">
 
                     <h3 class="profile-username text-center">{{ Setting::get('site_name', 'Sasto Hamro') }}</h3>
                     <p class="text-muted text-center">All Settings</p>
@@ -101,7 +101,7 @@
                                 <label for="site_logo" required class="col-sm-2 control-label">Logo</label>
 
                                 <div class="col-sm-10">
-                                    <img class="img-responsive" src="@if( Setting::get('site_logo_path')) {{ Setting::get('site_logo_path') }} @else {{asset('images/logo.png')}} @endif" style="margin-bottom:10px;width:150px;">
+                                    <img class="img-responsive" src="@if( Setting::get('site_logo')) {{ Setting::get('site_logo') }} @else {{asset('images/logo.png')}} @endif" style="margin-bottom:10px;width:150px;">
 
                                     <input type="file" accept="image/png, image/jpeg, image/jpg" id="site_logo" name="site_logo">
                                     <p class="help-block">Please enter .png .jpeg .jpg images only.</p>
@@ -112,7 +112,7 @@
                                 <label for="site_icon" required class="col-sm-2 control-label">Icon</label>
 
                                 <div class="col-sm-10">
-                                    <img class="img-responsive" src="@if( Setting::get('site_icon_path')) {{ Setting::get('site_icon_path') }} @else {{asset('images/logo.png')}} @endif" style="margin-bottom:10px;width:150px;">
+                                    <img class="img-responsive" src="@if( Setting::get('site_icon')) {{ Setting::get('site_icon') }} @else {{asset('images/logo.png')}} @endif" style="margin-bottom:10px;width:150px;">
 
                                     <input type="file" accept="image/png, image/jpeg, image/jpg" id="site_icon" name="site_icon">
                                     <p class="help-block">Please enter .png .jpeg .jpg images only.</p>

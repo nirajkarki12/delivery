@@ -44,19 +44,17 @@ class SettingController extends BaseController
             $data = $request->except('_token');
 
             if($request->file('site_logo')) {
-                if(!Helper::deleteImage(Setting::get('site_logo'), 'uploads')) throw new \Exception("Error Processing Request", 1);
+                Helper::deleteImage(Setting::get('site_logo'));
 
-                if(!$file = Helper::uploadImage($request->file('site_logo'), 'uploads')) throw new \Exception("Cannot Save Logo", 1);
+                if(!$file = Helper::uploadImage($request->file('site_logo'))) throw new \Exception("Cannot Save Logo", 1);
                 $data['site_logo'] = $file;
-                $data['site_logo_path'] = env('APP_URL') .'/storage/uploads/' .$file;
             }
 
             if($request->file('site_icon')) {
-                if(!Helper::deleteImage(Setting::get('site_icon'), 'uploads')) throw new Exception("Error Processing Request", 1);
+                Helper::deleteImage(Setting::get('site_icon'));
 
-                if(!$file = Helper::uploadImage($request->file('site_icon'), 'uploads')) throw new \Exception("Cannot Save Icon", 1);
+                if(!$file = Helper::uploadImage($request->file('site_icon'))) throw new \Exception("Cannot Save Icon", 1);
                 $data['site_icon'] = $file;
-                $data['site_icon_path'] = env('APP_URL') .'/storage/uploads/' .$file;
             }
 
 
