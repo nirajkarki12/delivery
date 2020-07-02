@@ -14,18 +14,25 @@ const mix = require('laravel-mix');
 
 mix.js([
         'resources/js/app.js',
-        'public/vendor/jquery/jquery-ui.js',
+        'public/plugins/jquery-ui/jquery-ui.min.js',
         'node_modules/jquery-validation/dist/jquery.validate.js',
-        'public/vendor/ckeditor5/build/ckeditor.js',
+        'public/plugins/ckeditor5/build/ckeditor.js',
         'resources/js/script.js',
       ], 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
     .styles([
         'public/css/app.css',
-        'resources/sass/style.css'
+		 'public/plugins/jquery-ui/jquery-ui.min.css',
+		 'public/template/css/icons.css',
+		 'public/template/css/style.css',
+		 'resources/sass/style.css'
       ], 'public/css/app.css')
+	.styles([
+		'public/template/css/style.css.map',
+	], 'public/css/style.css.map')
     ;
 
 mix.setPublicPath('public');
 mix.setResourceRoot('../');
+
 
