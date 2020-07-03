@@ -19,6 +19,7 @@ mix.js([
         'public/plugins/ckeditor5/build/ckeditor.js',
         'resources/js/script.js',
       ], 'public/js')
+	.js('node_modules/popper.js/dist/popper.js', 'public/js').sourceMaps()
     .sass('resources/sass/app.scss', 'public/css')
     .styles([
         'public/css/app.css',
@@ -27,9 +28,7 @@ mix.js([
 		 'public/template/css/style.css',
 		 'resources/sass/style.css'
       ], 'public/css/app.css')
-	.styles([
-		'public/template/css/style.css.map',
-	], 'public/css/style.css.map')
+	.styles('public/template/css/style.css.map', 'public/css/style.css.map')
     ;
 
 mix.setPublicPath('public');
