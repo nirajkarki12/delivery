@@ -4,187 +4,404 @@
 
 @section('content')
 
-@include('notification.notify')
 <div class="row">
-	<div class="col-sm-6 col-lg-3">
-		<div class="card text-center">
-			<div class="card-heading">
-				<h4 class="card-title text-muted mb-0">Total Subscription</h4>
+	<div class="col-xl-3 col-md-6">
+		<div class="card bg-primary mini-stat text-white">
+			<div class="p-3 mini-stat-desc">
+				<div class="clearfix">
+					<h6 class="text-uppercase mt-0 float-left text-white-50">Orders</h6>
+					<h4 class="mb-3 mt-0 float-right">1,587</h4>
+				</div>
+				<div>
+					<span class="badge badge-light text-info"> +11% </span> <span class="ml-2">From previous period</span>
+				</div>
+
 			</div>
-			<div class="card-body p-t-10">
-				<h2 class="m-t-0 m-b-15"><i class="mdi mdi-arrow-down text-danger m-r-10"></i><b>8952</b></h2>
-				<p class="text-muted m-b-0 m-t-20"><b>48%</b> From Last 24 Hours</p>
+			<div class="p-3">
+				<div class="float-right">
+					<a href="#" class="text-white-50"><i class="mdi mdi-cube-outline h5"></i></a>
+				</div>
+				<p class="font-14 m-0">Last : 1447</p>
 			</div>
 		</div>
 	</div>
 
-	<div class="col-sm-6 col-lg-3">
-		<div class="card text-center">
-			<div class="card-heading">
-				<h4 class="card-title text-muted mb-0">Order Status</h4>
+	<div class="col-xl-3 col-md-6">
+		<div class="card bg-info mini-stat text-white">
+			<div class="p-3 mini-stat-desc">
+				<div class="clearfix">
+					<h6 class="text-uppercase mt-0 float-left text-white-50">Revenue</h6>
+					<h4 class="mb-3 mt-0 float-right">$46,785</h4>
+				</div>
+				<div>
+					<span class="badge badge-light text-danger"> -29% </span> <span class="ml-2">From previous period</span>
+				</div>
 			</div>
-			<div class="card-body p-t-10">
-				<h2 class="m-t-0 m-b-15"><i class="mdi mdi-arrow-up text-success m-r-10"></i><b>6521</b></h2>
-				<p class="text-muted m-b-0 m-t-20"><b>42%</b> Orders in Last 10 months</p>
+			<div class="p-3">
+				<div class="float-right">
+					<a href="#" class="text-white-50"><i class="mdi mdi-buffer h5"></i></a>
+				</div>
+				<p class="font-14 m-0">Last : $47,596</p>
+			</div>
+		</div>
+	</div>
+	<div class="col-xl-3 col-md-6">
+		<div class="card bg-pink mini-stat text-white">
+			<div class="p-3 mini-stat-desc">
+				<div class="clearfix">
+					<h6 class="text-uppercase mt-0 float-left text-white-50">Average Price</h6>
+					<h4 class="mb-3 mt-0 float-right">15.9</h4>
+				</div>
+				<div>
+					<span class="badge badge-light text-primary"> 0% </span> <span class="ml-2">From previous period</span>
+				</div>
+			</div>
+			<div class="p-3">
+				<div class="float-right">
+					<a href="#" class="text-white-50"><i class="mdi mdi-tag-text-outline h5"></i></a>
+				</div>
+				<p class="font-14 m-0">Last : 15.8</p>
 			</div>
 		</div>
 	</div>
 
-	<div class="col-sm-6 col-lg-3">
-		<div class="card text-center">
-			<div class="card-heading">
-				<h4 class="card-title text-muted mb-0">Unique Visitors</h4>
+	<div class="col-xl-3 col-md-6">
+		<div class="card bg-success mini-stat text-white">
+			<div class="p-3 mini-stat-desc">
+				<div class="clearfix">
+					<h6 class="text-uppercase mt-0 float-left text-white-50">Product Sold</h6>
+					<h4 class="mb-3 mt-0 float-right">1890</h4>
+				</div>
+				<div>
+					<span class="badge badge-light text-info"> +89% </span> <span class="ml-2">From previous period</span>
+				</div>
 			</div>
-			<div class="card-body p-t-10">
-				<h2 class="m-t-0 m-b-15"><i class="mdi mdi-arrow-up text-success m-r-10"></i><b>452</b></h2>
-				<p class="text-muted m-b-0 m-t-20"><b>22%</b> From Last 24 Hours</p>
-			</div>
-		</div>
-	</div>
-
-	<div class="col-sm-6 col-lg-3">
-		<div class="card text-center">
-			<div class="card-heading">
-				<h4 class="card-title text-muted mb-0">Monthly Earnings</h4>
-			</div>
-			<div class="card-body p-t-10">
-				<h2 class="m-t-0 m-b-15"><i class="mdi mdi-arrow-down text-danger m-r-10"></i><b>5621</b></h2>
-				<p class="text-muted m-b-0 m-t-20"><b>35%</b> From Last 1 Month</p>
+			<div class="p-3">
+				<div class="float-right">
+					<a href="#" class="text-white-50"><i class="mdi mdi-briefcase-check h5"></i></a>
+				</div>
+				<p class="font-14 m-0">Last : 1776</p>
 			</div>
 		</div>
 	</div>
-</div> <!-- end row -->
-
+</div>
+<!-- end row -->
 <div class="row">
-	<div class="col-lg-7">
+	<div class="col-xl-4">
 		<div class="card">
 			<div class="card-body">
-				<h4 class="m-b-30 m-t-0">Recent Contacts</h4>
-				<div class="row">
-					<div class="col-12">
-						<div class="table-responsive">
-							<table class="table table-hover m-b-0">
-								<thead>
-								<tr>
-									<th>Name</th>
-									<th>Position</th>
-									<th>Office</th>
-									<th>Age</th>
-									<th>Start date</th>
-									<th>Salary</th>
-								</tr>
-
-								</thead>
-								<tbody>
-								<tr>
-									<td>Tiger Nixon</td>
-									<td>System Architect</td>
-									<td>Edinburgh</td>
-									<td>61</td>
-									<td>2011/04/25</td>
-									<td>$320,800</td>
-								</tr>
-								<tr>
-									<td>Garrett Winters</td>
-									<td>Accountant</td>
-									<td>Tokyo</td>
-									<td>63</td>
-									<td>2011/07/25</td>
-									<td>$170,750</td>
-								</tr>
-								<tr>
-									<td>Ashton Cox</td>
-									<td>Junior Technical Author</td>
-									<td>San Francisco</td>
-									<td>66</td>
-									<td>2009/01/12</td>
-									<td>$86,000</td>
-								</tr>
-								<tr>
-									<td>Cedric Kelly</td>
-									<td>Senior Javascript Developer</td>
-									<td>Edinburgh</td>
-									<td>22</td>
-									<td>2012/03/29</td>
-									<td>$433,060</td>
-								</tr>
-								<tr>
-									<td>Airi Satou</td>
-									<td>Accountant</td>
-									<td>Tokyo</td>
-									<td>33</td>
-									<td>2008/11/28</td>
-									<td>$162,700</td>
-								</tr>
-								<tr>
-									<td>Brielle Williamson</td>
-									<td>Integration Specialist</td>
-									<td>New York</td>
-									<td>61</td>
-									<td>2012/12/02</td>
-									<td>$372,000</td>
-								</tr>
-								<tr>
-									<td>Herrod Chandler</td>
-									<td>Sales Assistant</td>
-									<td>San Francisco</td>
-									<td>59</td>
-									<td>2012/08/06</td>
-									<td>$137,500</td>
-								</tr>
-
-								</tbody>
-							</table>
+				<h4 class="mt-0 header-title mb-4">Latest Messages</h4>
+				<div class="latest-massage">
+					<a href="#" class="latest-message-list">
+						<div class="border-bottom position-relative">
+							<div class="float-left user mr-3">
+								<h5 class="bg-primary text-center rounded-circle text-white mt-0">v</h5>
+							</div>
+							<div class="message-time">
+								<p class="m-0 text-muted">Just Now</p>
+							</div>
+							<div class="massage-desc">
+								<h5 class="font-14 mt-0 text-dark">Victor Zamora</h5>
+								<p class="text-muted">Hey! there I'm available...</p>
+							</div>
 						</div>
-					</div>
+					</a>
+					<a href="#" class="latest-message-list">
+						<div class="border-bottom mt-3 position-relative">
+							<div class="float-left user mr-3">
+								<h5 class="bg-success text-center rounded-circle text-white mt-0">p</h5>
+							</div>
+							<div class="message-time">
+								<p class="m-0 text-muted">2 Min. ago</p>
+							</div>
+							<div class="massage-desc">
+								<h5 class="font-14 mt-0 text-dark">Patrick Beeler</h5>
+								<p class="text-muted">I've finished it! See you so...</p>
+							</div>
+						</div>
+					</a>
+					<a href="#" class="latest-message-list">
+						<div class="border-bottom mt-3 position-relative">
+							<div class="float-left user mr-3">
+								<img src="assets/images/users/avatar-3.jpg" alt="" class="rounded-circle mb-3">
+							</div>
+							<div class="message-time">
+								<p class="m-0 text-muted">6 Min. ago</p>
+							</div>
+							<div class="massage-desc">
+								<h5 class="font-14 mt-0 text-dark">Ralph Ramirez</h5>
+								<p class="text-muted">This theme is awesome!</p>
+							</div>
+						</div>
+					</a>
+					<a href="#" class="latest-message-list">
+						<div class="border-bottom mt-3 position-relative">
+							<div class="float-left user mr-3">
+								<h5 class="bg-pink text-center rounded-circle text-white mt-0">b</h5>
+							</div>
+							<div class="message-time">
+								<p class="m-0 text-muted">01:34 pm</p>
+							</div>
+							<div class="massage-desc">
+								<h5 class="font-14 mt-0 text-dark">Bryan Lacy</h5>
+								<p class="text-muted">I've finished it! See you so...</p>
+							</div>
+						</div>
+					</a>
+					<a href="#" class="latest-message-list">
+						<div class="mt-3 position-relative">
+							<div class="float-left user mr-3">
+								<img src="assets/images/users/avatar-4.jpg" alt="" class="rounded-circle mb-3">
+							</div>
+							<div class="message-time">
+								<p class="m-0 text-muted">02:05 pm</p>
+							</div>
+							<div class="massage-desc">
+								<h5 class="font-14 mt-0 text-dark">James Sorrells</h5>
+								<p class="text-muted">Hey! there I'm available...</p>
+							</div>
+						</div>
+					</a>
 				</div>
+
+			</div>
+		</div>
+
+	</div>
+	<!-- end col -->
+
+	<div class="col-xl-4">
+		<div class="card">
+			<div class="card-body">
+				<h4 class="mt-0 header-title mb-4">Recent Activity</h4>
+				<ol class="activity-feed mb-0">
+					<li class="feed-item">
+						<div class="feed-item-list">
+							<span class="date text-white-50">Jan 10</span>
+							<span class="activity-text text-white">Responded to need “Volunteer Activities”</span>
+						</div>
+					</li>
+					<li class="feed-item">
+						<div class="feed-item-list">
+							<span class="date text-white-50">Jan 09</span>
+							<span class="activity-text text-white">Added an interest “Volunteer Activities”</span>
+						</div>
+					</li>
+					<li class="feed-item">
+						<div class="feed-item-list">
+							<span class="date text-white-50">Jan 08</span>
+							<span class="activity-text text-white">Joined the group “Boardsmanship Forum”</span>
+						</div>
+					</li>
+					<li class="feed-item">
+						<div class="feed-item-list">
+							<span class="date text-white-50">Jan 07</span>
+							<span class="activity-text text-white">Responded to need “In-Kind Opportunity”</span>
+						</div>
+					</li>
+				</ol>
+
 			</div>
 		</div>
 	</div>
 	<!-- end col -->
 
-	<div class="col-lg-5">
+	<div class="col-xl-4">
 		<div class="card">
 			<div class="card-body">
-				<h4 class="m-b-30 m-t-0">Goal Completion</h4>
+				<h4 class="mt-0 header-title mb-4">Social Source</h4>
+				<div class="text-center">
+					<div class="social-source-icon lg-icon mb-3">
+						<i class="mdi mdi-facebook h2 bg-primary text-white"></i>
+					</div>
+					<h5 class="font-16"><a href="#" class="text-dark">Facebook - <span class="text-muted">125 sales</span> </a></h5>
+					<p class="text-muted">Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis tincidunt.</p>
+					<a href="#" class="text-primary font-14">Learn more <i class="mdi mdi-chevron-right"></i></a>
+				</div>
+				<div class="row mt-5">
+					<div class="col-md-4">
+						<div class="social-source text-center mt-3">
+							<div class="social-source-icon mb-2">
+								<i class="mdi mdi-facebook h5 bg-primary text-white"></i>
+							</div>
+							<p class="font-14 text-muted mb-2">125 sales</p>
+							<h6>Facebook</h6>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="social-source text-center mt-3">
+							<div class="social-source-icon mb-2">
+								<i class="mdi mdi-twitter h5 bg-info text-white"></i>
+							</div>
+							<p class="font-14 text-muted mb-2">112 sales</p>
+							<h6>Twitter</h6>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="social-source text-center mt-3">
+							<div class="social-source-icon mb-2">
+								<i class="mdi mdi-instagram h5 bg-pink text-white"></i>
+							</div>
+							<p class="font-14 text-muted mb-2">104 sales</p>
+							<h6>Instagram</h6>
 
-				<p class="font-600 m-b-5">Add Product to cart <span class="text-primary float-right"><b>80%</b></span></p>
-				<div class="progress  m-b-20">
-					<div class="progress-bar progress-bar-primary " role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;">
-					</div><!-- /.progress-bar .progress-bar-danger -->
-				</div><!-- /.progress .no-rounded -->
+						</div>
+					</div>
+				</div>
 
-				<p class="font-600 m-b-5">Complete Purchases <span class="text-primary float-right"><b>50%</b></span></p>
-				<div class="progress  m-b-20">
-					<div class="progress-bar progress-bar-primary " role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
-					</div><!-- /.progress-bar .progress-bar-pink -->
-				</div><!-- /.progress .no-rounded -->
-
-				<p class="font-600 m-b-5">Visit Premium plan <span class="text-primary float-right"><b>70%</b></span></p>
-				<div class="progress  m-b-20">
-					<div class="progress-bar progress-bar-primary " role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%;">
-					</div><!-- /.progress-bar .progress-bar-info -->
-				</div><!-- /.progress .no-rounded -->
-
-				<p class="font-600 m-b-5">Send Inquiries <span class="text-primary float-right"><b>65%</b></span></p>
-				<div class="progress  m-b-20">
-					<div class="progress-bar progress-bar-primary " role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="width: 65%;">
-					</div><!-- /.progress-bar .progress-bar-warning -->
-				</div><!-- /.progress .no-rounded -->
-
-				<p class="font-600 m-b-5">Monthly Purchases <span class="text-primary float-right"><b>25%</b></span></p>
-				<div class="progress  m-b-20">
-					<div class="progress-bar progress-bar-primary " role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%;">
-					</div><!-- /.progress-bar .progress-bar-warning -->
-				</div><!-- /.progress .no-rounded -->
-
-				<p class="font-600 m-b-5"> Daily Visits<span class="text-primary float-right"><b>40%</b></span></p>
-				<div class="progress  m-b-0">
-					<div class="progress-bar progress-bar-primary " role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%;">
-					</div><!-- /.progress-bar .progress-bar-success -->
-				</div><!-- /.progress .no-rounded -->
 			</div>
 		</div>
-	</div> <!-- end col -->
-</div> <!-- end row -->
+	</div>
+	<!-- end col -->
+</div>
+<!-- end row -->
+<div class="row">
+	<div class="col-xl-9">
+		<div class="card">
+			<div class="card-body">
+				<h4 class="mt-0 header-title mb-4">Latest Trasaction</h4>
+				<div class="table-responsive">
+					<table class="table table-hover">
+						<thead>
+						<tr>
+							<th scope="col">ID No.</th>
+							<th scope="col">Name</th>
+							<th scope="col">Date</th>
+							<th scope="col">Price</th>
+							<th scope="col">Quantity</th>
+							<th scope="col">Status</th>
+							<th scope="col">Amount</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr>
+							<th scope="row">#14567</th>
+							<td>Michael Mitchell</td>
+							<td>14 Jan</td>
+							<td>$74</td>
+							<td>2</td>
+							<td>
+								<div class="progress" style="height: 5px;">
+									<div class="progress-bar bg-danger" role="progressbar" style="width: 89%;" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
+							</td>
+							<td>$148</td>
+						</tr>
+						<tr>
+							<th scope="row">#14568</th>
+							<td>Dennis Cervantes</td>
+							<td>15 Jan</td>
+							<td>$72</td>
+							<td>2</td>
+							<td>
+								<div class="progress" style="height: 5px;">
+									<div class="progress-bar bg-warning" role="progressbar" style="width: 64%;" aria-valuenow="64" aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
+							</td>
+							<td>$144</td>
+						</tr>
+						<tr>
+							<th scope="row">#14569</th>
+							<td>Bernard Moats</td>
+							<td>16 Jan</td>
+							<td>$86</td>
+							<td>1</td>
+							<td>
+								<div class="progress" style="height: 5px;">
+									<div class="progress-bar bg-success" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
+							</td>
+							<td>$86</td>
+						</tr>
+						<tr>
+							<th scope="row">#14570</th>
+							<td>Patrick Esquivel</td>
+							<td>17 Jan</td>
+							<td>$59</td>
+							<td>2</td>
+							<td>
+								<div class="progress" style="height: 5px;">
+									<div class="progress-bar bg-warning" role="progressbar" style="width: 64%;" aria-valuenow="64" aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
+							</td>
+							<td>$118</td>
+						</tr>
+						<tr>
+							<th scope="row">#14571</th>
+							<td>Michael Barger</td>
+							<td>18 Jan</td>
+							<td>$62</td>
+							<td>2</td>
+							<td>
+								<div class="progress" style="height: 5px;">
+									<div class="progress-bar bg-success" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
+							</td>
+							<td>$124</td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<div class="col-xl-3">
+		<div class="card">
+			<div class="card-body">
+				<h4 class="mt-0 header-title mb-4">Document files</h4>
+				<table class="table table-striped mb-0">
+					<tbody>
+					<tr>
+						<td><i class="far fa-file-pdf text-primary h2"></i></td>
+						<td>
+							<h6 class="mt-0">2015</h6>
+							<p class="text-muted mb-0">dolor sit amet</p></td>
+						<td>
+							<a href="#" class="btn btn-primary btn-sm">
+								<i class="fas fa-download"></i>
+							</a>
+						</td>
+					</tr>
+					<tr>
+						<td><i class="far fa-file-pdf text-primary h2"></i></td>
+						<td>
+							<h6 class="mt-0">2016</h6>
+							<p class="text-muted mb-0">dolor sit amet</p></td>
+						<td>
+							<a href="#" class="btn btn-primary btn-sm">
+								<i class="fas fa-download"></i>
+							</a>
+						</td>
+					</tr>
+					<tr>
+						<td><i class="far fa-file-pdf text-primary h2"></i></td>
+						<td>
+							<h6 class="mt-0">2017</h6>
+							<p class="text-muted mb-0">pretium quis</p></td>
+						<td>
+							<a href="#" class="btn btn-primary btn-sm">
+								<i class="fas fa-download"></i>
+							</a>
+						</td>
+					</tr>
+					<tr>
+						<td><i class="far fa-file-pdf text-primary h2"></i></td>
+						<td>
+							<h6 class="mt-0">2018</h6>
+							<p class="text-muted mb-0">ultricies nec</p></td>
+						<td>
+							<a href="#" class="btn btn-primary btn-sm">
+								<i class="fas fa-download"></i>
+							</a>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end row -->
 @endsection

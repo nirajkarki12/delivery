@@ -113,10 +113,8 @@
 // Unlike Bootstrap's original .table-responsive, this is applied for all widths. (i.e. NOT only applied <768px)
 // Other diffs:
 // - Small border radius
-// - Position: relative;
 // - Bigger bottom margin
 .table-responsive[data-pattern="priority-columns"] {
-    position: relative;
     width: 100%;
     margin-bottom: @line-height-computed;
     overflow-y: hidden;
@@ -178,13 +176,32 @@
 
     }
 }
+
+// for when the sticky table header is using the postition:absolute solution.
+.table-responsive.absolute-solution {
+  position: relative;
+}
     
 // Column priority
 .mq.js .table-responsive[data-pattern="priority-columns"],
 .mq.js.lt-ie10 .sticky-table-header {
     
-    th[data-priority],
-    td[data-priority] {
+    th[data-priority="-1"],
+    td[data-priority="-1"],
+    th[data-priority="0"],
+    td[data-priority="0"],
+    td[data-priority="1"],
+    td[data-priority="1"],
+    th[data-priority="2"],
+    td[data-priority="2"],
+    th[data-priority="3"],
+    td[data-priority="3"],
+    th[data-priority="4"],
+    td[data-priority="4"],
+    th[data-priority="5"],
+    td[data-priority="5"],
+    th[data-priority="6"],
+    td[data-priority="6"] {
        display: none;
     }
 
@@ -251,6 +268,37 @@
             display: table-cell;
         }
     }
+
+    //hide cell
+    th.cell-hide,
+    td.cell-hide {
+       display: none;
+    }
+
+    //show cell
+    th.cell-show,
+    td.cell-show {
+       display: table-cell;
+    }
+
+    //show cell (ie9)
+    .lt-ie9 & th.cell-show,
+    .lt-ie9 & td.cell-show {
+       display: inline;
+    }
+
+    // display all
+    .lt-ie9 &.display-all {
+        th, td {
+            display: inline !important;
+        }
+    }
+
+    table.display-all {
+        th, td {
+            display: table-cell !important;
+        }
+    }
 }
 
 //table utility classes
@@ -263,7 +311,8 @@ table {
     }
 
     // focus
-    &.focus-on tbody {
+    &.focus-on tbody,
+    &.focus-on tfoot {
         tr:hover {
             cursor: pointer;
         }
@@ -283,37 +332,6 @@ table {
             }
         }
     }
-
-    //hide cell
-    th.col-hide,
-    td.col-hide {
-       display: none;
-    }
-
-    //show cell
-    th.col-show,
-    td.col-show {
-       display: inline;
-    }
-
-    //show cell (ie9)
-    .lt-ie9 & th.col-show,
-    .lt-ie9 & td.col-show {
-       display: table-cell;
-    }
-
-    // display all
-    .lt-ie9 &.display-all {
-        th, td {
-            display: inline !important;
-        }
-    }
-
-    &.display-all {
-        th, td {
-            display: table-cell !important;
-        }
-    }
 }
 
 //Sticky table header
@@ -323,23 +341,19 @@ table {
   border-radius: 0;
   border-top: 1px solid @table-border-color;
   border-bottom: 1px solid @table-border-color;
-  position: absolute;
-  top: 0;
   visibility: hidden;
   z-index: @zindex-stickyHeader;
   overflow: hidden;
-  min-width: 100%;
 
-  &.fixed-solution {
-      min-width: 0;
+  .fixed-solution & {
       position: fixed;
-      
-      .lt-ie10 & {
-          border-left: 1px solid @table-border-color;
-          border-right: 1px solid @table-border-color;
-          box-sizing: content-box;
-          border-bottom: none;
-      }
+      min-width: 0;
+  }
+
+  .absolute-solution & {
+    position: absolute;
+    min-width: 100%;
+    top: 0;
   }
     
   &.border-radius-fix {
@@ -347,55 +361,55 @@ table {
       border-bottom-right-radius: 3px;
   }
     
-    // Tighten up spacing
-    > .table {
-      margin-bottom: 0;
+  // Tighten up spacing
+  > .table {
+    margin-bottom: 0;
 
-      // Ensure the content doesn't wrap
-      > thead,
-      > tbody,
-      > tfoot {
-        > tr {
-          > th,
-          > td {
-            white-space: nowrap;
-          }
+    // Ensure the content doesn't wrap
+    > thead,
+    > tbody,
+    > tfoot {
+      > tr {
+        > th,
+        > td {
+          white-space: nowrap;
+        }
+      }
+    }
+  }
+
+  // Special overrides for the bordered tables
+  > .table-bordered {
+    border: 0;
+
+    // Nuke the appropriate borders so that the parent can handle them
+    > thead,
+    > tbody,
+    > tfoot {
+      > tr {
+        > th:first-child,
+        > td:first-child {
+          border-left: 0;
+        }
+        > th:last-child,
+        > td:last-child {
+          border-right: 0;
         }
       }
     }
 
-    // Special overrides for the bordered tables
-    > .table-bordered {
-      border: 0;
-
-      // Nuke the appropriate borders so that the parent can handle them
-      > thead,
-      > tbody,
-      > tfoot {
-        > tr {
-          > th:first-child,
-          > td:first-child {
-            border-left: 0;
-          }
-          > th:last-child,
-          > td:last-child {
-            border-right: 0;
-          }
+    // Only nuke the last row's bottom-border in `tbody` and `tfoot` since
+    // chances are there will be only one `tr` in a `thead` and that would
+    // remove the border altogether.
+    > tbody,
+    > tfoot {
+      > tr:last-child {
+        > th,
+        > td {
+          border-bottom: 0;
         }
       }
-
-      // Only nuke the last row's bottom-border in `tbody` and `tfoot` since
-      // chances are there will be only one `tr` in a `thead` and that would
-      // remove the border altogether.
-      > tbody,
-      > tfoot {
-        > tr:last-child {
-          > th,
-          > td {
-            border-bottom: 0;
-          }
-        }
-      }
-
     }
+
+  }
 }

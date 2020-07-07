@@ -18,31 +18,49 @@
 </head>
 
 <body>
+	<!-- Loader -->
+{{--	<div id="preloader">--}}
+{{--		<div id="status">--}}
+{{--			<div class="spinner">--}}
+{{--				<div class="rect1"></div>--}}
+{{--				<div class="rect2"></div>--}}
+{{--				<div class="rect3"></div>--}}
+{{--				<div class="rect4"></div>--}}
+{{--				<div class="rect5"></div>--}}
+{{--			</div>--}}
+{{--		</div>--}}
+{{--	</div>--}}
 	<!-- Begin page -->
-	<div class="accountbg"></div>
-		<div class="wrapper-page">
-			<div class="card">
-
-				<div class="card-body">
-					<h3 class="text-center m-t-0 m-b-15">
-						<a href="{{route('admin.login')}}" class="logo"><img src="@if(Setting::get('site_logo')) {{Setting::get('site_logo')}} @else {{asset('images/logo_white.png')}} @endif" alt="logo-img"></a>
-					</h3>
-					@yield('content')
+	<div class="account-pages">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 align-items-center">
+					<div class="col-lg-5" style="margin: 0 auto;">
+						<div class="card mb-0">
+							<div class="card-body">
+								<div class="p-2">
+									<h4 class="text-muted float-right font-18 mt-4">@yield('content-title')</h4>
+									<div>
+										<a href="{{route('admin.login')}}" class="logo logo-admin">
+											<img src="@if(Setting::get('site_logo')) {{Setting::get('site_logo')}} @else {{asset('images/logo_white.png')}} @endif" height="40" alt="logo">
+										</a>
+									</div>
+								</div>
+								<div class="p-2">
+									@yield('content')
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+
 	<!-- Scripts -->
 	<script src="{{ asset('js/app.js') }}"></script>
 	<script src="{{asset('template/js/modernizr.min.js')}}"></script>
-	<script src="{{asset('template/js/detect.js')}}"></script>
-	<script src="{{asset('template/js/fastclick.js')}}"></script>
-	<script src="{{asset('template/js/jquery.slimscroll.js')}}"></script>
-	<script src="{{asset('template/js/jquery.blockUI.js')}}"></script>
 	<script src="{{asset('template/js/waves.js')}}"></script>
-	<script src="{{asset('template/js/wow.min.js')}}"></script>
-	<script src="{{asset('template/js/jquery.nicescroll.js')}}"></script>
-	<script src="{{asset('template/js/jquery.scrollTo.min.js')}}"></script>
 	<script src="{{asset('template/js/app.js')}}"></script>
 
 	@yield('scripts')

@@ -1,91 +1,128 @@
-<!-- Top Bar Start -->
-<div class="topbar">
-	<!-- LOGO -->
-	<div class="topbar-left">
-		<div class="text-center">
-			<a href="{{route('admin.dashboard')}}" class="logo"><img src="{{ asset('images/logo.png') }}" alt="logo-img"></a>
-			<a href="{{route('admin.dashboard')}}" class="logo-sm"><img src="{{ asset('images/logo_sm.png') }}" alt="logo-img"></a>
-		</div>
-	</div>
-	<!-- Button mobile view to collapse sidebar menu -->
+<div class="topbar-main">
+	<div class="container-fluid">
+		<!-- Logo-->
+		<div>
+			<a href="{{route('admin.dashboard')}}" class="logo">
+				<img src="@if( Setting::get('site_logo')) {{ Setting::get('site_logo') }} @else {{asset('images/logo.png')}} @endif" alt="" height="26">
+			</a>
 
-	<nav class="navbar navbar-default" role="navigation">
-		<div class="container-fluid">
-			<ul class="list-inline menu-left mb-0">
-				<li class="float-left">
-					<button class="button-menu-mobile open-left waves-light waves-effect">
-						<i class="mdi mdi-menu"></i>
-					</button>
+		</div>
+		<!-- End Logo-->
+
+		<div class="menu-extras topbar-custom navbar p-0">
+
+			<ul class="list-inline d-none d-lg-block mb-0">
+				<li class="list-inline-item dropdown notification-list">
+					<a class="nav-link dropdown-toggle arrow-none waves-effect" data-toggle="dropdown" href="#" role="button"
+						aria-haspopup="false" aria-expanded="false">
+						Create New <i class="mdi mdi-plus"></i>
+					</a>
+					<div class="dropdown-menu dropdown-menu-animated">
+						<a class="dropdown-item" href="#">Action</a>
+						<a class="dropdown-item" href="#">Another action</a>
+						<a class="dropdown-item" href="#">Something else here</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="#">Separated link</a>
+					</div>
 				</li>
+				<li class="list-inline-item notification-list">
+					<a href="#" class="nav-link waves-effect">
+						Activity
+					</a>
+				</li>
+
 			</ul>
 
-			<ul class="nav navbar-right float-right list-inline">
-				<li class="dropdown d-none d-sm-block">
-					<a href="#" data-target="#" class="dropdown-toggle waves-effect waves-light notification-icon-box" data-toggle="dropdown" aria-expanded="true">
-						<i class="fa fa-bell"></i> <span class="badge badge-xs badge-danger"></span>
+			<ul class="list-inline ml-auto mb-0">
+
+				<!-- notification-->
+
+				<li class="list-inline-item dropdown notification-list">
+					<a class="nav-link dropdown-toggle arrow-none waves-effect" data-toggle="dropdown" href="#" role="button"
+						aria-haspopup="false" aria-expanded="false">
+						<i class="mdi mdi-bell-outline noti-icon"></i>
+						<span class="badge badge-pill noti-icon-badge">3</span>
 					</a>
-					<ul class="dropdown-menu dropdown-menu-lg">
-						<li class="text-center notifi-title">Notification <span class="badge badge-xs badge-success">3</span></li>
-						<li class="list-group">
-							<!-- list item-->
-							<a href="javascript:void(0);" class="list-group-item">
-								<div class="media">
-									<div class="media-heading">Your order is placed</div>
-									<p class="m-0">
-										<small>Dummy text of the printing and typesetting industry.</small>
-									</p>
-								</div>
+					<div class="dropdown-menu dropdown-menu-right dropdown-arrow dropdown-menu-lg dropdown-menu-animated">
+						<!-- item-->
+						<div class="dropdown-item noti-title">
+							<h5>Notification (3)</h5>
+						</div>
+
+						<div class="slimscroll-noti">
+							<!-- item-->
+							<a href="javascript:void(0);" class="dropdown-item notify-item active">
+								<div class="notify-icon bg-success"><i class="mdi mdi-cart-outline"></i></div>
+								<p class="notify-details"><b>Your order is placed</b><span class="text-muted">Dummy text of the printing and typesetting industry.</span></p>
 							</a>
-							<!-- list item-->
-							<a href="javascript:void(0);" class="list-group-item">
-								<div class="media">
-									<div class="media-body clearfix">
-										<div class="media-heading">New Message received</div>
-										<p class="m-0">
-											<small>You have 87 unread messages</small>
-										</p>
-									</div>
-								</div>
+
+							<!-- item-->
+							<a href="javascript:void(0);" class="dropdown-item notify-item">
+								<div class="notify-icon bg-danger"><i class="mdi mdi-message-text-outline"></i></div>
+								<p class="notify-details"><b>New Message received</b><span class="text-muted">You have 87 unread messages</span></p>
 							</a>
-							<!-- list item-->
-							<a href="javascript:void(0);" class="list-group-item">
-								<div class="media">
-									<div class="media-body clearfix">
-										<div class="media-heading">Your item is shipped.</div>
-										<p class="m-0">
-											<small>It is a long established fact that a reader will</small>
-										</p>
-									</div>
-								</div>
+
+							<!-- item-->
+							<a href="javascript:void(0);" class="dropdown-item notify-item">
+								<div class="notify-icon bg-info"><i class="mdi mdi-filter-outline"></i></div>
+								<p class="notify-details"><b>Your item is shipped</b><span class="text-muted">It is a long established fact that a reader will</span></p>
 							</a>
-							<!-- last list item -->
-							<a href="javascript:void(0);" class="list-group-item">
-								<small class="text-primary">See all notifications</small>
+
+							<!-- item-->
+							<a href="javascript:void(0);" class="dropdown-item notify-item">
+								<div class="notify-icon bg-success"><i class="mdi mdi-message-text-outline"></i></div>
+								<p class="notify-details"><b>New Message received</b><span class="text-muted">You have 87 unread messages</span></p>
 							</a>
-						</li>
-					</ul>
+
+							<!-- item-->
+							<a href="javascript:void(0);" class="dropdown-item notify-item">
+								<div class="notify-icon bg-warning"><i class="mdi mdi-cart-outline"></i></div>
+								<p class="notify-details"><b>Your order is placed</b><span class="text-muted">Dummy text of the printing and typesetting industry.</span></p>
+							</a>
+
+						</div>
+
+						<!-- All-->
+						<a href="javascript:void(0);" class="dropdown-item notify-all">
+							View All
+						</a>
+
+					</div>
 				</li>
-				<li class="d-none d-sm-block">
-					<a href="#" id="btn-fullscreen" class="waves-effect waves-light notification-icon-box"><i class="mdi mdi-fullscreen"></i></a>
+				<!-- User-->
+				<li class="list-inline-item dropdown notification-list nav-user">
+					<a class="nav-link dropdown-toggle arrow-none waves-effect" data-toggle="dropdown" href="#" role="button"
+						aria-haspopup="false" aria-expanded="false">
+						<img src="@if(Auth::guard('admin')->user()->picture){{Auth::guard('admin')->user()->picture}} @else {{asset('images/placeholder.jpg')}} @endif" alt="user" class="rounded-circle">
+						<span class="d-none d-md-inline-block ml-1">{{Auth::guard('admin')->user()->name}} <i class="mdi mdi-chevron-down"></i> </span>
+					</a>
+					<div class="dropdown-menu dropdown-menu-right dropdown-menu-animated profile-dropdown">
+						<a class="dropdown-item" href="{{route('admin.profile')}}"><i class="dripicons-user text-muted"></i> Profile</a>
+						<a class="dropdown-item" href="#"><i class="dripicons-wallet text-muted"></i> My Wallet</a>
+						<a class="dropdown-item" href="{{route('admin.config')}}"><span class="badge badge-success float-right m-t-5">5</span><i class="dripicons-gear text-muted"></i> Settings</a>
+						<a class="dropdown-item" href="#"><i class="dripicons-lock text-muted"></i> Lock screen</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="{{route('admin.logout')}}"><i class="dripicons-exit text-muted"></i> Logout</a>
+
+				<li class="menu-item list-inline-item">
+					<!-- Mobile menu toggle-->
+					<a class="navbar-toggle nav-link">
+						<div class="lines">
+							<span></span>
+							<span></span>
+							<span></span>
+						</div>
+					</a>
+					<!-- End mobile menu toggle-->
 				</li>
 
-				<li class="dropdown">
-					<a href="javascript:void(0)" class="dropdown-toggle profile waves-effect waves-light" data-toggle="dropdown" aria-expanded="true">
-						<img src="@if(Auth::guard('admin')->user()->picture){{Auth::guard('admin')->user()->picture}} @else {{asset('images/placeholder.jpg')}} @endif" alt="user-img" class="rounded-circle">
-						<span class="hidden-xs" style="margin:6px 0 0 7px;display: inline-block;">{{Auth::guard('admin')->user()->name}}</span>
-					</a>
-					<ul class="dropdown-menu">
-						<li><a href="{{route('admin.profile')}}" class="dropdown-item"> Profile</a></li>
-						<li><a href="{{route('admin.config')}}" class="dropdown-item">
-{{--								<span class="badge badge-success float-right">5</span> --}}
-								Settings </a></li>
-{{--						<li><a href="javascript:void(0)" class="dropdown-item"> Lock screen</a></li>--}}
-						<li class="dropdown-divider"></li>
-						<li><a href="{{route('admin.logout')}}" class="dropdown-item"> Logout</a></li>
-					</ul>
-				</li>
 			</ul>
+
 		</div>
-	</nav>
+		<!-- end menu-extras -->
+
+		<div class="clearfix"></div>
+
+	</div> <!-- end container -->
 </div>
-<!-- Top Bar End -->
+<!-- end topbar-main -->

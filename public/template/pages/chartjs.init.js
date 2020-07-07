@@ -1,8 +1,9 @@
-/**
-Template Name: Appzia Admin
-Chartjs
-*/
-
+/*
+ Template Name: Zinzer - Responsive Bootstrap 4 Admin Dashboard
+ Author: Themesdesign
+ Website: www.themesdesign.in
+ File: Chart js 
+ */
 
 !function($) {
     "use strict";
@@ -10,8 +11,6 @@ Chartjs
     var ChartJs = function() {};
 
     ChartJs.prototype.respChart = function(selector,type,data, options) {
-        //default config
-        Chart.defaults.global.defaultFontColor = "rgba(255,255,255,0.6)";
         // get selector by context
         var ctx = selector.get(0).getContext("2d");
         // pointing parent container to make chart js inherit its width
@@ -58,24 +57,45 @@ Chartjs
             datasets: [
                 {
                     label: "Sales Analytics",
-                    fill: false,
-                    lineTension: 0.1,
-                    backgroundColor: "#00a3ff",
-                    borderColor: "#00a3ff",
+                    fill: true,
+                    lineTension: 0.5,
+                    backgroundColor: "rgba(89, 133, 238, 0.2)",
+                    borderColor: "#5985ee",
                     borderCapStyle: 'butt',
                     borderDash: [],
                     borderDashOffset: 0.0,
                     borderJoinStyle: 'miter',
-                    pointBorderColor: "#00a3ff",
+                    pointBorderColor: "#5985ee",
                     pointBackgroundColor: "#fff",
                     pointBorderWidth: 1,
                     pointHoverRadius: 5,
-                    pointHoverBackgroundColor: "#00a3ff",
-                    pointHoverBorderColor: "#eef0f2",
+                    pointHoverBackgroundColor: "#5985ee",
+                    pointHoverBorderColor: "#5985ee",
                     pointHoverBorderWidth: 2,
                     pointRadius: 1,
                     pointHitRadius: 10,
                     data: [65, 59, 80, 81, 56, 55, 40, 55, 30, 80]
+                },
+                {
+                    label: "Monthly Earnings",
+                    fill: true,
+                    lineTension: 0.5,
+                    backgroundColor: "rgba(235, 239, 242, 0.2)",
+                    borderColor: "#ebeff2",
+                    borderCapStyle: 'butt',
+                    borderDash: [],
+                    borderDashOffset: 0.0,
+                    borderJoinStyle: 'miter',
+                    pointBorderColor: "#ebeff2",
+                    pointBackgroundColor: "#fff",
+                    pointBorderWidth: 1,
+                    pointHoverRadius: 5,
+                    pointHoverBackgroundColor: "#ebeff2",
+                    pointHoverBorderColor: "#eef0f2",
+                    pointHoverBorderWidth: 2,
+                    pointRadius: 1,
+                    pointHitRadius: 10,
+                    data: [80, 23, 56, 65, 23, 35, 85, 25, 92, 36]
                 }
             ]
         };
@@ -98,20 +118,17 @@ Chartjs
         var donutChart = {
             labels: [
                 "Desktops",
-                "Tablets",
-                "Mobiles"
+                "Tablets"
             ],
             datasets: [
                 {
-                    data: [300, 50, 100],
+                    data: [300, 210],
                     backgroundColor: [
-                        "#04a2b3",
-                        "#00a3ff",
+                        "#5985ee",
                         "#ebeff2"
                     ],
                     hoverBackgroundColor: [
-                        "#04a2b3",
-                        "#00a3ff",
+                        "#5985ee",
                         "#ebeff2"
                     ],
                     hoverBorderColor: "#fff"
@@ -124,20 +141,17 @@ Chartjs
         var pieChart = {
             labels: [
                 "Desktops",
-                "Tablets",
-                "Mobiles"
+                "Tablets"
             ],
             datasets: [
                 {
-                    data: [300, 50, 100],
+                    data: [300, 180],
                     backgroundColor: [
-                        "#04a2b3",
-                        "#00a3ff",
+                        "#46cd93",
                         "#ebeff2"
                     ],
                     hoverBackgroundColor: [
-                        "#04a2b3",
-                        "#00a3ff",
+                        "#46cd93",
                         "#ebeff2"
                     ],
                     hoverBorderColor: "#fff"
@@ -152,11 +166,11 @@ Chartjs
             datasets: [
                 {
                     label: "Sales Analytics",
-                    backgroundColor: "#00a3ff",
-                    borderColor: "#00a3ff",
+                    backgroundColor: "rgba(70, 205, 147, 0.4)",
+                    borderColor: "#46cd93",
                     borderWidth: 1,
-                    hoverBackgroundColor: "#00a3ff",
-                    hoverBorderColor: "#00a3ff",
+                    hoverBackgroundColor: "rgba(70, 205, 147, 0.5)",
+                    hoverBorderColor: "#46cd93",
                     data: [65, 59, 81, 45, 56, 80, 50,20]
                 }
             ]
@@ -170,22 +184,22 @@ Chartjs
             datasets: [
                 {
                     label: "Desktops",
-                    backgroundColor: "rgba(179,181,198,0.2)",
-                    borderColor: "rgba(179,181,198,1)",
-                    pointBackgroundColor: "rgba(179,181,198,1)",
+                    backgroundColor: "rgba(70, 205, 147, 0.2)",
+                    borderColor: "#46cd93",
+                    pointBackgroundColor: "#46cd93",
                     pointBorderColor: "#fff",
                     pointHoverBackgroundColor: "#fff",
-                    pointHoverBorderColor: "rgba(179,181,198,1)",
+                    pointHoverBorderColor: "#46cd93",
                     data: [65, 59, 90, 81, 56, 55, 40]
                 },
                 {
                     label: "Tablets",
-                    backgroundColor: "rgba(230,96,96,0.2)",
-                    borderColor: "#00a3ff",
-                    pointBackgroundColor: "#00a3ff",
+                    backgroundColor: "rgba(89, 133, 238, 0.2)",
+                    borderColor: "#5985ee",
+                    pointBackgroundColor: "#5985ee",
                     pointBorderColor: "#fff",
                     pointHoverBackgroundColor: "#fff",
-                    pointHoverBorderColor: "#00a3ff",
+                    pointHoverBorderColor: "#5985ee",
                     data: [28, 48, 40, 19, 96, 27, 100]
                 }
             ]
@@ -202,10 +216,10 @@ Chartjs
                     18
                 ],
                 backgroundColor: [
-                    "#f62f37",
-                    "#188ae2",
-                    "#04a2b3",
-                    "#f8ca4e"
+                    "#ff5560",
+                    "#46cd93",
+                    "#4bbbce",
+                    "#5985ee"
                 ],
                 label: 'My dataset', // for legend
                 hoverBorderColor: "#fff"

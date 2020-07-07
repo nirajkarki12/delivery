@@ -16,7 +16,7 @@ mix.js([
         'resources/js/app.js',
         'public/plugins/jquery-ui/jquery-ui.min.js',
         'node_modules/jquery-validation/dist/jquery.validate.js',
-        'public/plugins/ckeditor5/build/ckeditor.js',
+        // 'public/plugins/ckeditor5/build/ckeditor.js',
         'resources/js/script.js',
       ], 'public/js')
 	.js('node_modules/popper.js/dist/popper.js', 'public/js').sourceMaps()

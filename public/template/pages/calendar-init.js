@@ -1,8 +1,10 @@
 
-/**
-* Theme: Appzia - Bootstrap 4 Admin Template
-* Full calendar page
-*/
+/*
+ Template Name: Zinzer - Responsive Bootstrap 4 Admin Dashboard
+ Author: Themesdesign
+ Website: www.themesdesign.in
+ File: Calendar init js
+ */
 
 !function($) {
     "use strict";

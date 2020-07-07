@@ -282,10 +282,6 @@ span.error[style*="inline"]
 	max-width: 45px;
 	height: auto;
 }
-.checkbox input[type="checkbox"]:checked + label::after {
-	font-family: 'Font Awesome\ 5 Free';
-	font-weight: 900;
-}
 .profile-user-img {
 	display: block;
 	margin: 0 auto;
@@ -293,6 +289,21 @@ span.error[style*="inline"]
 	padding: 3px;
 	border: 3px solid #d2d6de;
 	border-radius: 50%;
+}
+ul.config>.nav-item>a {
+	font-weight: 700;
+}
+ul.config>.nav-item>a:hover span  {
+	color: #000;
+}
+ul.config>.nav-item>a>span {
+	font-size: 1.1em;
+}
+ul.config>.nav-item:hover {
+	background-color: #ccc;
+}
+ul.config>.nav-item>a.active:hover span{
+	color: #fff;
 }
 
 

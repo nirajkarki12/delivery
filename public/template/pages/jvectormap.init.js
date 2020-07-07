@@ -1,7 +1,9 @@
-/**
-* Theme: Appzia Admin
-* VectorMap
-*/
+/*
+ Template Name: Zinzer - Responsive Bootstrap 4 Admin Dashboard
+ Author: Themesdesign
+ Website: www.themesdesign.in
+ File: Vector Maps
+ */
 
 !function($) {
     "use strict";
@@ -12,19 +14,19 @@
         //various examples
         $('#world-map-markers').vectorMap({
 			map : 'world_mill_en',
-			scaleColors : ['#03a9f4', '#03a9f4'],
+			scaleColors : ['#46cd93', '#46cd93'],
 			normalizeFunction : 'polynomial',
 			hoverOpacity : 0.7,
 			hoverColor : false,
 			regionStyle : {
 				initial : {
-					fill : '#e66060'
+					fill : '#5985ee'
 				}
 			},
 			 markerStyle: {
                 initial: {
                     r: 9,
-                    'fill': '#03a9f4',
+                    'fill': '#46cd93',
                     'fill-opacity': 0.9,
                     'stroke': '#fff',
                     'stroke-width' : 7,
@@ -119,29 +121,22 @@
 			}]
 		});
 
-
-        $('#europe').vectorMap({map: 'europe_mill_en',backgroundColor: 'transparent',
-          regionStyle: {
-            initial: {
-              fill: '#dcdcdc'
-            }
-          }});
         $('#usa').vectorMap({map: 'us_aea_en',backgroundColor: 'transparent',
                   regionStyle: {
                     initial: {
-                      fill: '#dcdcdc'
+                      fill: '#5985ee'
                     }
                   }});
         $('#uk').vectorMap({map: 'uk_mill_en',backgroundColor: 'transparent',
                   regionStyle: {
                     initial: {
-                      fill: '#dcdcdc'
+                      fill: '#5985ee'
                     }
                   }});
         $('#chicago').vectorMap({map: 'us-il-chicago_mill_en',backgroundColor: 'transparent',
                   regionStyle: {
                     initial: {
-                      fill: '#dcdcdc'
+                      fill: '#5985ee'
                     }
                   }});
 

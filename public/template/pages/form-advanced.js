@@ -1,7 +1,10 @@
-/**
- * Theme: Appzia Admin
- * Form Advanced
+/*
+ Template Name: Zinzer - Responsive Bootstrap 4 Admin Dashboard
+ Author: Themesdesign
+ Website: www.themesdesign.in
+ File: Form Advanced components
  */
+
 
 !function($) {
     "use strict";
@@ -10,11 +13,6 @@
     
     AdvancedForm.prototype.init = function() {
         //creating various controls
-
-        // Time Pickers
-        jQuery('#timepicker').timepicker({defaultTIme: false});
-        jQuery('#timepicker2').timepicker({showMeridian: false});
-        jQuery('#timepicker3').timepicker({minuteStep: 15});
 
         //colorpicker start
         $('.colorpicker-default').colorpicker({
@@ -40,10 +38,15 @@
         });
 
         //Bootstrap-MaxLength
-        $('input#defaultconfig').maxlength();
+        $('input#defaultconfig').maxlength({
+            warningClass: "badge badge-info",
+            limitReachedClass: "badge badge-warning"
+        });
 
         $('input#thresholdconfig').maxlength({
-            threshold: 20
+            threshold: 20,
+            warningClass: "badge badge-info",
+            limitReachedClass: "badge badge-warning"
         });
 
         $('input#moreoptions').maxlength({
@@ -64,22 +67,24 @@
 
         $('textarea#textarea').maxlength({
             alwaysShow: true,
-            warningClass: "badge badge-success",
-            limitReachedClass: "badge badge-danger"
+            warningClass: "badge badge-info",
+            limitReachedClass: "badge badge-warning"
         });
 
         $('input#placement').maxlength({
             alwaysShow: true,
             placement: 'top-left',
-            warningClass: "badge badge-success",
-            limitReachedClass: "badge badge-danger"
+            warningClass: "badge badge-info",
+            limitReachedClass: "badge badge-warning"
         });
 
         //Bootstrap-TouchSpin
         $(".vertical-spin").TouchSpin({
             verticalbuttons: true,
             verticalupclass: 'ion-plus-round',
-            verticaldownclass: 'ion-minus-round'
+            verticaldownclass: 'ion-minus-round',
+            buttondown_class: 'btn btn-primary',
+            buttonup_class: 'btn btn-primary'
         });
 
         $("input[name='demo1']").TouchSpin({
@@ -89,28 +94,44 @@
             decimals: 2,
             boostat: 5,
             maxboostedstep: 10,
-            postfix: '%'
+            postfix: '%',
+            buttondown_class: 'btn btn-primary',
+            buttonup_class: 'btn btn-primary'
         });
         $("input[name='demo2']").TouchSpin({
             min: -1000000000,
             max: 1000000000,
             stepinterval: 50,
             maxboostedstep: 10000000,
-            prefix: '$'
+            prefix: '$',
+            buttondown_class: 'btn btn-primary',
+            buttonup_class: 'btn btn-primary'
         });
-        $("input[name='demo3']").TouchSpin();
+        $("input[name='demo3']").TouchSpin({
+            buttondown_class: 'btn btn-primary',
+            buttonup_class: 'btn btn-primary'
+        });
         $("input[name='demo3_21']").TouchSpin({
-            initval: 40
+            initval: 40,
+            buttondown_class: 'btn btn-primary',
+            buttonup_class: 'btn btn-primary'
         });
         $("input[name='demo3_22']").TouchSpin({
-            initval: 40
+            initval: 40,
+            buttondown_class: 'btn btn-primary',
+            buttonup_class: 'btn btn-primary'
         });
 
         $("input[name='demo5']").TouchSpin({
             prefix: "pre",
-            postfix: "post"
+            postfix: "post",
+            buttondown_class: 'btn btn-primary',
+            buttonup_class: 'btn btn-primary'
         });
-        $("input[name='demo0']").TouchSpin({});
+        $("input[name='demo0']").TouchSpin({
+            buttondown_class: 'btn btn-primary',
+            buttonup_class: 'btn btn-primary'
+        });
     },
     //init
     $.AdvancedForm = new AdvancedForm, $.AdvancedForm.Constructor = AdvancedForm

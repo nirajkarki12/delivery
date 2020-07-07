@@ -32,7 +32,7 @@
 @endif
 
 @if(Session::has('flash_success'))
-   <div class="alert alert-info alert-dismissible fade show">
+   <div class="alert alert-success alert-dismissible fade show">
      {{Session::get('flash_success')}}
      <button type="button" class="close" data-dismiss="alert">×</button>
    </div>

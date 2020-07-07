@@ -1,59 +1,19 @@
-/**
- * Theme: Appzia Admin
- * Datatable
+/*
+ Template Name: Zinzer - Responsive Bootstrap 4 Admin Dashboard
+ Author: Themesdesign
+ Website: www.themesdesign.in
+ File: Datatable js
  */
 
-!function($) {
-    "use strict";
+$(document).ready(function() {
+    $('#datatable').DataTable();
 
-    var DataTable = function() {
-        this.$dataTableButtons = $("#datatable-buttons")
-    };
-    DataTable.prototype.createDataTableButtons = function() {
-        0 !== this.$dataTableButtons.length && this.$dataTableButtons.DataTable({
-            dom: "Bfrtip",
-            buttons: [{
-                extend: "copy",
-                className: "btn-primary"
-            }, {
-                extend: "csv",
-                className: "btn-primary"
-            }, {
-                extend: "excel",
-                className: "btn-primary"
-            }, {
-                extend: "pdf",
-                className: "btn-primary"
-            }, {
-                extend: "print",
-                className: "btn-primary"
-            }],
-            responsive: !0
-        });
-    },
-    DataTable.prototype.init = function() {
-        //creating demo tabels
-        $('#datatable').dataTable();
-        $('#datatable-keytable').DataTable({keys: true});
-        $('#datatable-responsive').DataTable();
-        $('#datatable-scroller').DataTable({
-            ajax: "assets/plugins/datatables/json/scroller-demo.json",
-            deferRender: true,
-            scrollY: 380,
-            scrollCollapse: true,
-            scroller: true
-        });
-        var table = $('#datatable-fixed-header').DataTable({fixedHeader: true});
+    //Buttons examples
+    var table = $('#datatable-buttons').DataTable({
+        lengthChange: false,
+        buttons: ['copy', 'excel', 'pdf', 'colvis']
+    });
 
-        //creating table with button
-        this.createDataTableButtons();
-    },
-    //init
-    $.DataTable = new DataTable, $.DataTable.Constructor = DataTable
-}(window.jQuery),
-
-//initializing
-function ($) {
-    "use strict";
-    $.DataTable.init();
-}(window.jQuery);
+    table.buttons().container()
+        .appendTo('#datatable-buttons_wrapper .col-md-6:eq(0)');
+} );
